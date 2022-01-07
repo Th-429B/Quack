@@ -10,13 +10,10 @@ import {
 	Pressable,
 	Alert
 } from "react-native";
-import { Component } from "react/cjs/react.production.min";
-import { Sound } from "./sound";
 import { Audio } from "expo-av";
 import { storeData, getData } from "./storage";
-import Icon from "react-native-ionicons";
-import { Ionicons } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
 
 const Clicker = () => {
 	const [count, setCount] = useState(0);
@@ -65,13 +62,11 @@ const Clicker = () => {
 					onPress={() => setModalVis(true)}
 				>
 					<Entypo name="shop" size={36} color="black" />
-					{/* <Text style={styles.modalButton}>Show modal</Text> */}
 				</TouchableOpacity>
 			</View>
 
-			<View style={styles.modalButton}>
+			<View>
 				<Modal
-					style={styles.modalButton}
 					animationType="slide"
 					transparent={true}
 					visible={modalVisible}
@@ -81,10 +76,10 @@ const Clicker = () => {
 					}}
 				>
 					<TouchableOpacity
-						style={styles.modalButton}
+						style={styles.modalCloseButton}
 						onPress={() => setModalVis(!modalVisible)}
 					>
-						<Text style={styles.modalButton}>Close</Text>
+						<AntDesign name="closecircle" size={36} color="black" />
 					</TouchableOpacity>
 
 					<View style={styles.duckList}>
@@ -92,13 +87,11 @@ const Clicker = () => {
 							<View style={styles.duckListImage}>
 								<View style={styles.duckListCell}>
 									<TouchableOpacity>
-										<Image source={require("./assets/duck_default.png")}/>
+										<Image style={styles.duckSize} source={require("./assets/duck_default_shrink.png")}/>
 									</TouchableOpacity>
-								</View>
-								<View style={styles.duckListCell}>
-									<TouchableOpacity>
-										<Image source={require("./assets/duck_swag_default.png")}/>
-									</TouchableOpacity>
+									{/* <TouchableOpacity>
+										<Image style={styles.duckSize} source={require("./assets/duck_swag_default.png")}/>
+									</TouchableOpacity> */}
 								</View>
 							</View>
 						</View>
@@ -150,7 +143,14 @@ const styles = StyleSheet.create({
 		color: "white",
 		padding: 0,
 		fontWeight: "bold",
-		fontSize: 30,
+	},
+	modalCloseButton: {
+		alignItems: "flex-end",
+		justifyContent: "space-between",
+		backgroundColor: "white",
+		color: "white",
+		padding: 30,
+		fontWeight: "bold",
 	},
 	duckList: {
 		flexDirection: "column",
@@ -161,18 +161,23 @@ const styles = StyleSheet.create({
 		flexDirection: "row"
 	},
 	duckListImage: {
-		flexDirection: "column",
-		flexShrink: 1
+		flexDirection: "row",
+		flexShrink: 1,
+		
 	},
 	duckListCell: {
-		width: "50%"
-		// height: "50%"
+		flexDirection: "row",
+		justifyContent: "space-between",
 	},
 	duckyduckyducky: {
 		flex: 1,
 		width: null,
 		height: null,
 		resizeMode: "contain"
+	},
+	duckSize: {
+		height: "70%",
+		width:200
 	}
 	
 });
