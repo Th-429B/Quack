@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View, Image, TouchableWithoutFeedback } from "react-native";
-import { Audio } from 'expo-av';
-
+import { Component } from "react/cjs/react.production.min";
 
 const Clicker = () => {
   const [count, setCount] = useState(0);
@@ -9,6 +8,16 @@ const Clicker = () => {
   const onPress = () => {
       setCount(prevCount => prevCount + 1);}
 
+
+  const [showDuckQuack, setDuckState] = useState(false);
+  const changeDuck = () => {
+    setDuckState(showDuckQuack ? false : true);
+    // showDuckQuack ? defaultDuck : defaultDuckQuack;
+  }
+  const defaultDuck = require("./assets/duck_default.png");
+  const defaultDuckQuack = require("./assets/duck_default_quack.png");
+
+  var imgSource = showDuckQuack ? defaultDuckQuack : defaultDuck;
 
   return (
     <View style={styles.container}>
@@ -18,8 +27,10 @@ const Clicker = () => {
       <TouchableWithoutFeedback
         style={styles.button}
         onPress={onPress}
+        onPressIn={changeDuck}
+        onPressOut={changeDuck}
       >
-        <Image source={require('./assets/duck_default.png')}/>
+        <Image source={imgSource}/>
       </TouchableWithoutFeedback>
     </View>
   );
