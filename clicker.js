@@ -139,6 +139,11 @@ const Clicker = () => {
 		}
 		setModalVis(false);
 	}
+	
+	// modal dynamic styling
+	const styleModal = (duckName) => {
+		return variants[duckName].unlocked ? 1 : 0.5;
+	}
 
 	return (
 		<View style={styles.container}>
@@ -182,23 +187,27 @@ const Clicker = () => {
 							<TouchableOpacity onPress={() => {
 								changeDuck("default");
 							}}>
-								<Image source={variants.default.base} style={styles.modalImg} resizeMode="contain"/>
+								<Image source={variants.default.base} style={[styles.modalImg, {tintColor: "black"}]} resizeMode="contain"/>
+								<Image source={variants.default.base} style={[styles.modalImg, {position: "absolute", opacity: styleModal("default")}]} resizeMode="contain"/>
 								<Text></Text>
 							</TouchableOpacity>
 
 							<TouchableOpacity onPress={() => modalVariantPress(10, "swag")}>
-								<Image source={variants.swag.base} style={styles.modalImg} resizeMode="contain"/>
-								<Text style={styles.duckPrice}>10</Text>
+								<Image source={variants.swag.base} style={[styles.modalImg, {tintColor: "black"}]} resizeMode="contain"/>
+								<Image source={variants.swag.base} style={[styles.modalImg, {position: "absolute", opacity: styleModal("swag")}]} resizeMode="contain"/>
+								<Text>10</Text>
 							</TouchableOpacity>
 
 							<TouchableOpacity onPress={() => modalVariantPress(50, "devil")}>
-								<Image source={variants.devil.base} style={styles.modalImg} resizeMode="contain"/>
-								<Text style={styles.duckPrice}>50</Text>
+								<Image source={variants.devil.base} style={[styles.modalImg, {tintColor: "black"}]} resizeMode="contain"/>
+								<Image source={variants.devil.base} style={[styles.modalImg, {position: "absolute", opacity: styleModal("devil")}]} resizeMode="contain"/>
+								<Text>50</Text>
 							</TouchableOpacity>
 							
 							<TouchableOpacity onPress={() => modalVariantPress(100, "angel")}>
-								<Image source={variants.angel.base} style={styles.modalImg} resizeMode="contain"/>
-								<Text style={styles.duckPrice}>100</Text>
+								<Image source={variants.angel.base} style={[styles.modalImg, {tintColor: "black"}]} resizeMode="contain"/>
+								<Image source={variants.angel.base} style={[styles.modalImg, {position: "absolute", opacity: styleModal("angel")}]} resizeMode="contain"/>
+								<Text>100</Text>
 							</TouchableOpacity>
 						</View>
 					</View>
