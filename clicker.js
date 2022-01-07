@@ -63,6 +63,16 @@ const Clicker = () => {
 	// modal here
 	const [modalVisible, setModalVis] = useState(false);
 
+	// functionality for shop
+	const buyDuck = (value) => {
+		if (count >= value) {
+			setCount(count - value);
+			Alert.alert("Bought Duck!")
+		} else {
+			Alert.alert("Not enough money!")
+		}
+	} 
+
 	return (
 		<View style={styles.container}>
 			<View style={styles.countContainer}>
@@ -98,17 +108,18 @@ const Clicker = () => {
 					</View>
 					<View style={styles.modalContainer}>
 						<View style={styles.modalCell}>
-							<TouchableOpacity>
+							<TouchableOpacity onPress={() => buyDuck(10)}>
 								<Image source={require("./assets/duck_swag_default.png")} style={styles.modalImg} resizeMode="contain"/>
-								<Text>3000</Text>
+								<Text>10</Text>
 							</TouchableOpacity>
-							<TouchableOpacity>
+							<TouchableOpacity onPress={() => buyDuck(50)}>
 								<Image source={require("./assets/duck_swag_default.png")} style={styles.modalImg} resizeMode="contain"/>
-								<Text>3000</Text>
+								<Text>50</Text>
 							</TouchableOpacity>
 							
-							<TouchableOpacity>
+							<TouchableOpacity onPress={() => buyDuck(100)} >
 								<Image source={require("./assets/duck_swag_default.png")} style={styles.modalImg} resizeMode="contain"/>
+								<Text>100</Text>
 							</TouchableOpacity>
 						</View>
 					</View>
