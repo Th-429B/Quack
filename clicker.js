@@ -6,6 +6,9 @@ import {
 	View,
 	Image,
 	TouchableWithoutFeedback,
+	Modal,
+	Pressable,
+	Alert
 } from "react-native";
 import { Component } from "react/cjs/react.production.min";
 import { Sound } from "./sound";
@@ -17,11 +20,9 @@ const Clicker = () => {
 
 
 	async function playSound() {
-		// console.log('Loading Sound');
 		const sound = new Audio.Sound();
 		const status = await sound.loadAsync(require("./assets/quack.mp3"));
 
-		// console.log('Playing Sound');
 		await sound.replayAsync();
 	}
 
@@ -35,18 +36,46 @@ const Clicker = () => {
 	const [showDuckQuack, setDuckState] = useState(false);
 	const changeDuck = () => {
 		setDuckState(showDuckQuack ? false : true);
-		// showDuckQuack ? defaultDuck : defaultDuckQuack;
 	};
 	const defaultDuck = require("./assets/duck_default.png");
 	const defaultDuckQuack = require("./assets/duck_default_quack.png");
 
 	var imgSource = showDuckQuack ? defaultDuckQuack : defaultDuck;
 
+	const [modalVisible, setModalVis] = useState(false);
+
 	return (
 		<View style={styles.container}>
 			<View style={styles.countContainer}>
 				<Text style={styles.scoreText}>Count: {count}</Text>
 			</View>
+
+			<View style={styles.modalButton}>
+				<Modal
+					style={styles.modalButton}
+					animationType="slide"
+					transparent={true}
+					visible={modalVisible}
+					onRequestClose={() => {
+						// Alert.alert("Modal has been closed");
+						setModalVis(!modalVisible);
+					}}
+				>
+					<Pressable
+						style={styles.modalButton}
+						onPress={() => setModalVis(!modalVisible)}
+					>
+						<Text style={styles.modalButton}>Hide Modal</Text>
+					</Pressable>
+				</Modal>
+				<Pressable
+					style={styles.modalButton}
+					onPress={() => setModalVis(true)}
+				>
+					<Text style={styles.modalButton}>Show modal</Text>
+				</Pressable>
+			</View>
+
 			<TouchableWithoutFeedback
 				style={styles.button}
 				onPress={onPress}
@@ -82,6 +111,14 @@ const styles = StyleSheet.create({
 		fontWeight: "bold",
 		fontSize: 30,
 	},
+	modalButton: {
+		alignItems: "center",
+		justifyContent: "center",
+		backgroundColor: "#0488d0",
+		color: "white",
+		fontWeight: "bold",
+		fontSize: 30,
+	}
 });
 
 export default Clicker;
