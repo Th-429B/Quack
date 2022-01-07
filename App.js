@@ -1,10 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, SafeAreaView, Platform } from 'react-native';
+import { TouchableOpacity } from 'react-native-web';
+import Clicker from "./clicker";
 
 export default function App() {
   return (
     <SafeAreaView style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+      <Clicker/>
     </SafeAreaView>
   );
 }
