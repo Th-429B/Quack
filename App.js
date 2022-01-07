@@ -1,7 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, SafeAreaView, Platform } from 'react-native';
 import { TouchableOpacity } from 'react-native-web';
+import { Audio } from 'expo-av';
 import Clicker from "./clicker";
+import Sound from "./sound";
+
+
 
 export default function App() {
   return (
