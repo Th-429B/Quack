@@ -91,6 +91,9 @@ const Clicker = () => {
 						<View style={styles.duckListRow}>
 							<View style={styles.duckListImage}>
 								<TouchableOpacity>
+									<Image source={require("./assets/duck_default.png")}/>
+								</TouchableOpacity>
+								<TouchableOpacity>
 									<Image source={require("./assets/duck_swag_default.png")}/>
 								</TouchableOpacity>
 							</View>
@@ -151,7 +154,13 @@ const styles = StyleSheet.create({
 
 	duckListRow: {
 		flexDirection: "row"
+	},
+	duckListImage: {
+		flexDirection: "column",
+		flexShrink: 1,
+		flex: -1
 	}
+	
 });
 
 export default Clicker;
