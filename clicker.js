@@ -9,30 +9,46 @@ import {
 	Modal,
 	Pressable,
 	Alert,
-	Dimensions
+	Dimensions,
 } from "react-native";
 import { Audio } from "expo-av";
 import { storeData, getData } from "./storage";
-import { Entypo } from '@expo/vector-icons';
-import { AntDesign } from '@expo/vector-icons';
+import { Entypo } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
 
 const variants = [
-	{name: "default", base: require("./assets/duck_default.png"), quack: require("./assets/duck_default_quack.png")},
-	{name: "swag", base: require("./assets/duck_swag_default.png"), quack: require("./assets/duck_swag_quack.png")},
-	{name: "devil", base: require("./assets/duck_devil_default.png"), quack: require("./assets/duck_devil_quack.png")},
-	{name: "angel", base: require("./assets/duck_angel_default.png"), quack: require("./assets/duck_angel_quack.png")}
-]
+	{
+		name: "default",
+		base: require("./assets/duck_default.png"),
+		quack: require("./assets/duck_default_quack.png"),
+	},
+	{
+		name: "swag",
+		base: require("./assets/duck_swag_default.png"),
+		quack: require("./assets/duck_swag_quack.png"),
+	},
+	{
+		name: "devil",
+		base: require("./assets/duck_devil_default.png"),
+		quack: require("./assets/duck_devil_quack.png"),
+	},
+	{
+		name: "angel",
+		base: require("./assets/duck_angel_default.png"),
+		quack: require("./assets/duck_angel_quack.png"),
+	},
+];
 
-const deviceWidth = Dimensions.get('window').width;
+const deviceWidth = Dimensions.get("window").width;
 
 const Clicker = () => {
+
 	const [count, setCount] = useState(0);
 
 	// to load the previous count
 	useEffect(() => {
-        getData((count) => setCount(count))
-    }, []);
-
+		getData((count) => setCount(count));
+	}, []);
 
 	// to play duck sound on click
 	async function playSound() {
@@ -46,7 +62,6 @@ const Clicker = () => {
 	const onPress = () => {
 		playSound();
 		storeData(count);
-
 		setCount((prevCount) => prevCount + 1);
 	};
 
@@ -67,16 +82,16 @@ const Clicker = () => {
 	const buyDuck = (value) => {
 		if (count >= value) {
 			setCount(count - value);
-			Alert.alert("Bought Duck!")
+			Alert.alert("Bought Duck!");
 		} else {
-			Alert.alert("Not enough money!")
+			Alert.alert("Not enough money!");
 		}
-	} 
+	};
 
 	return (
 		<View style={styles.container}>
 			<View style={styles.countContainer}>
-				<Text style={styles.scoreText}>Count: {count}</Text>
+				<Text style={styles.scoreText}>Score: {count}</Text>
 				<TouchableOpacity
 					style={styles.modalShowButton}
 					onPress={() => setModalVis(true)}
@@ -96,34 +111,49 @@ const Clicker = () => {
 			>
 				<View style={styles.shopContainer}>
 					<View style={styles.shopHeader}>
-						
-						
-						<Text style={{ fontSize: 30 ,fontWeight: "bold" }}>Shop</Text>
-						
+						<Text style={{ fontSize: 30, fontWeight: "bold" }}>
+							Shop
+						</Text>
+
 						<TouchableOpacity
 							onPress={() => setModalVis(!modalVisible)}
 						>
-							<AntDesign name="closecircle" size={36} color="black" />
+							<AntDesign
+								name="closecircle"
+								size={36}
+								color="black"
+							/>
 						</TouchableOpacity>
 					</View>
 					<View style={styles.modalContainer}>
 						<View style={styles.modalCell}>
 							<TouchableOpacity onPress={() => buyDuck(10)}>
-								<Image source={require("./assets/duck_swag_default.png")} style={styles.modalImg} resizeMode="contain"/>
-								<Text>10</Text>
+								<Image
+									source={require("./assets/duck_swag_default.png")}
+									style={styles.modalImg}
+									resizeMode="contain"
+								/>
+								<Text style={styles.duckPrice}>10</Text>
 							</TouchableOpacity>
 							<TouchableOpacity onPress={() => buyDuck(50)}>
-								<Image source={require("./assets/duck_swag_default.png")} style={styles.modalImg} resizeMode="contain"/>
-								<Text>50</Text>
+								<Image
+									source={require("./assets/duck_swag_default.png")}
+									style={styles.modalImg}
+									resizeMode="contain"
+								/>
+								<Text style={styles.duckPrice}>50</Text>
 							</TouchableOpacity>
-							
-							<TouchableOpacity onPress={() => buyDuck(100)} >
-								<Image source={require("./assets/duck_swag_default.png")} style={styles.modalImg} resizeMode="contain"/>
-								<Text>100</Text>
+
+							<TouchableOpacity onPress={() => buyDuck(100)}>
+								<Image
+									source={require("./assets/duck_swag_default.png")}
+									style={styles.modalImg}
+									resizeMode="contain"
+								/>
+								<Text style={styles.duckPrice}>100</Text>
 							</TouchableOpacity>
 						</View>
 					</View>
-
 				</View>
 			</Modal>
 
@@ -133,7 +163,7 @@ const Clicker = () => {
 				onPressIn={changeDuck}
 				onPressOut={changeDuck}
 			>
-				<Image source={imgSource}/>
+				<Image source={imgSource} />
 			</TouchableWithoutFeedback>
 		</View>
 	);
@@ -190,26 +220,30 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 		justifyContent: "space-between",
 		backgroundColor: "white",
-		padding: 30
+		padding: 30,
 	},
 
 	modalContainer: {
 		flex: 9,
-		backgroundColor: "white"
+		backgroundColor: "white",
 	},
 	modalCell: {
 		flexDirection: "row",
 		flexWrap: "wrap",
 		overflow: "scroll",
 		alignItems: "center",
-		position: 'relative',
-		margin: 10
+		position: "relative",
+		margin: 10,
 	},
 	modalImg: {
-		width: deviceWidth/2 - 10,
-		height: deviceWidth/2 - 10
+		width: deviceWidth / 2 - 10,
+		height: deviceWidth / 2 - 10,
+	},
+	duckPrice: {
+		alignSelf: "center",
+		fontSize: 30,
+		fontWeight: "bold",
 	}
-	
 });
 
 export default Clicker;
