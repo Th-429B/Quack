@@ -14,16 +14,20 @@ import { Component } from "react/cjs/react.production.min";
 import { Sound } from "./sound";
 import { Audio } from "expo-av";
 import { storeData, getData } from "./storage";
-import { FlatList } from "react-native-web";
+import Icon from "react-native-ionicons";
+import { Ionicons } from '@expo/vector-icons';
+import { Entypo } from '@expo/vector-icons';
 
 const Clicker = () => {
 	const [count, setCount] = useState(0);
 
+	// to load the previous count
 	useEffect(() => {
         getData((count) => setCount(count))
     }, []);
 
 
+	// to play duck sound on click
 	async function playSound() {
 		const sound = new Audio.Sound();
 		const status = await sound.loadAsync(require("./assets/quack.mp3"));
@@ -31,6 +35,7 @@ const Clicker = () => {
 		await sound.replayAsync();
 	}
 
+	// on press duck handler
 	const onPress = () => {
 		playSound();
 		storeData(count);
@@ -38,6 +43,7 @@ const Clicker = () => {
 		setCount((prevCount) => prevCount + 1);
 	};
 
+	// change duck image
 	const [showDuckQuack, setDuckState] = useState(false);
 	const changeDuck = () => {
 		setDuckState(showDuckQuack ? false : true);
@@ -47,12 +53,20 @@ const Clicker = () => {
 
 	var imgSource = showDuckQuack ? defaultDuckQuack : defaultDuck;
 
+	// modal here
 	const [modalVisible, setModalVis] = useState(false);
 
 	return (
 		<View style={styles.container}>
 			<View style={styles.countContainer}>
 				<Text style={styles.scoreText}>Count: {count}</Text>
+				<TouchableOpacity
+					style={styles.modalShowButton}
+					onPress={() => setModalVis(true)}
+				>
+					<Entypo name="shop" size={36} color="black" />
+					{/* <Text style={styles.modalButton}>Show modal</Text> */}
+				</TouchableOpacity>
 			</View>
 
 			<View style={styles.modalButton}>
@@ -66,12 +80,12 @@ const Clicker = () => {
 						setModalVis(!modalVisible);
 					}}
 				>
-					<Pressable
+					<TouchableOpacity
 						style={styles.modalButton}
 						onPress={() => setModalVis(!modalVisible)}
 					>
 						<Text style={styles.modalButton}>Close</Text>
-					</Pressable>
+					</TouchableOpacity>
 
 					<View style={styles.duckList}>
 						<View style={styles.duckListRow}>
@@ -84,12 +98,6 @@ const Clicker = () => {
 					</View>
 
 				</Modal>
-				<Pressable
-					style={styles.modalButton}
-					onPress={() => setModalVis(true)}
-				>
-					<Text style={styles.modalButton}>Customise duck</Text>
-				</Pressable>
 			</View>
 
 			<TouchableWithoutFeedback
@@ -119,19 +127,21 @@ const styles = StyleSheet.create({
 	},
 	countContainer: {
 		flex: 0.7,
+		flexDirection: "row",
 		alignItems: "flex-start",
-		justifyContent: "flex-start",
+		justifyContent: "space-between",
 		padding: 5,
 	},
 	scoreText: {
 		fontWeight: "bold",
 		fontSize: 30,
 	},
-	modalButton: {
+	modalShowButton: {
 		alignItems: "center",
-		justifyContent: "center",
-		backgroundColor: "#0488d0",
+		justifyContent: "space-between",
+		backgroundColor: "white",
 		color: "white",
+		padding: 0,
 		fontWeight: "bold",
 		fontSize: 30,
 	},
