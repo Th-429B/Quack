@@ -14,6 +14,9 @@ import { Component } from "react/cjs/react.production.min";
 import { Sound } from "./sound";
 import { Audio } from "expo-av";
 import { storeData, getData } from "./storage";
+import Icon from "react-native-ionicons";
+import { Ionicons } from '@expo/vector-icons';
+import { Entypo } from '@expo/vector-icons';
 
 const Clicker = () => {
 	const [count, setCount] = useState(0);
@@ -57,6 +60,13 @@ const Clicker = () => {
 		<View style={styles.container}>
 			<View style={styles.countContainer}>
 				<Text style={styles.scoreText}>Count: {count}</Text>
+				<TouchableOpacity
+					style={styles.modalShowButton}
+					onPress={() => setModalVis(true)}
+				>
+					<Entypo name="shop" size={36} color="black" />
+					{/* <Text style={styles.modalButton}>Show modal</Text> */}
+				</TouchableOpacity>
 			</View>
 
 			<View style={styles.modalButton}>
@@ -70,19 +80,13 @@ const Clicker = () => {
 						setModalVis(!modalVisible);
 					}}
 				>
-					<Pressable
+					<TouchableOpacity
 						style={styles.modalButton}
 						onPress={() => setModalVis(!modalVisible)}
 					>
 						<Text style={styles.modalButton}>Hide Modal</Text>
-					</Pressable>
+					</TouchableOpacity>
 				</Modal>
-				<Pressable
-					style={styles.modalButton}
-					onPress={() => setModalVis(true)}
-				>
-					<Text style={styles.modalButton}>Show modal</Text>
-				</Pressable>
 			</View>
 
 			<TouchableWithoutFeedback
@@ -112,21 +116,21 @@ const styles = StyleSheet.create({
 	},
 	countContainer: {
 		flex: 0.7,
+		flexDirection: "row",
 		alignItems: "flex-start",
-		justifyContent: "flex-start",
+		justifyContent: "space-between",
 		padding: 5,
 	},
 	scoreText: {
 		fontWeight: "bold",
 		fontSize: 30,
 	},
-	modalButton: {
+	modalShowButton: {
 		alignItems: "center",
-		justifyContent: "center",
-		backgroundColor: "#0488d0",
+		justifyContent: "space-between",
+		backgroundColor: "white",
 		color: "white",
-		fontWeight: "bold",
-		fontSize: 30,
+		padding: 0,
 	}
 });
 
