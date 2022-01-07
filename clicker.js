@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View, Image, TouchableWithoutFeedback } from "react-native";
 
 const Clicker = () => {
   const [count, setCount] = useState(0);
@@ -10,12 +10,12 @@ const Clicker = () => {
       <View style={styles.countContainer}>
         <Text>Count: {count}</Text>
       </View>
-      <TouchableOpacity
+      <TouchableWithoutFeedback
         style={styles.button}
         onPress={onPress}
       >
-        <Text>Press Here</Text>
-      </TouchableOpacity>
+        <Image source={require('./assets/duck_default.png')}/>
+      </TouchableWithoutFeedback>
     </View>
   );
 };
