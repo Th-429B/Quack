@@ -22,32 +22,11 @@ export const loadCoins = async (setState) => {
 	}
 };
 
-const variants = {
-	default: {
-		base: require("./assets/ducks/duck_default.png"),
-		quack: require("./assets/ducks/duck_default_quack.png"),
-		unlocked: true
-	},
-	swag: {
-		base: require("./assets/ducks/duck_swag_default.png"),
-		quack: require("./assets/ducks/duck_swag_quack.png"),
-		unlocked: false
-	},
-	devil: {
-		base: require("./assets/ducks/duck_devil_default.png"),
-		quack: require("./assets/ducks/duck_devil_quack.png"),
-		unlocked: false
-	},
-	angel: {
-		base: require("./assets/ducks/duck_angel_default.png"),
-		quack: require("./assets/ducks/duck_angel_quack.png"),
-		unlocked: false
-	}
-};
+const test = [true, false, false, false]
 
 export const saveDuckPurchased = async (ducksPurchased) => {
 	try {
-        // console.log(ducksPurchased);
+        console.log(ducksPurchased);
         const jsonValue = JSON.stringify(ducksPurchased);
         // console.log(jsonValue);
 		await AsyncStorage.setItem('@duck_purchased', jsonValue);
@@ -57,13 +36,16 @@ export const saveDuckPurchased = async (ducksPurchased) => {
 	}
 };
 
-export const loadDuckPurchased = async () => {
+export const loadDuckPurchased = async (setState) => {
 	try {
 		const jsonValue = await AsyncStorage.getItem('@duck_purchased');
         console.log(jsonValue);
-        return jsonValue != null ? JSON.parse(jsonValue) : null;
+        const arr =  jsonValue != null ? JSON.parse(jsonValue) : null;
+        // console.log(arr);
+        setState(arr);
+        return arr;
 	} catch (e) {
-        alert('Error: Unable to save score.');
+        alert('Error: Unable to load ducks purchased.');
         console.log(e);
 	}
 };

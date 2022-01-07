@@ -41,7 +41,8 @@ const variants = {
 	}
 };
 
-// const variants = loadDuckPurchased();
+// const test = loadDuckPurchased();
+// console.log(test);
 
 // let ducksPurchased = loadDuckPurchased();
 
@@ -51,13 +52,22 @@ let currentDuckQuack = variants.default.quack;
 const Clicker = () => {
 
 	const [count, setCount] = useState(0);
-	// const [variant, setVariant] = useState([]);
+	const [bool, setBool] = useState();
 
 	// to load the previous count
 	useEffect(() => {
-		loadDuckPurchased((list) => setVariant(list));
         loadCoins((count) => setCount(count));
+		loadDuckPurchased((arr) => setBool(arr)).then((bool) => console.log(bool));
+		// loadDucks();
     }, []);
+
+	const loadDucks = () => {
+		console.log("did i get called?")
+		variants["swag"].unlocked = bool[1];
+		variants["devil"].unlocked = bool[2];
+		variants["angel"].unlocked = bool[3];
+		console.log(variants["swag"].unlocked);
+	}
 
 	// to play duck sound on click
 	async function playSound() {
@@ -88,17 +98,21 @@ const Clicker = () => {
 	// handle shop press
 	const modalVariantPress = (value, duckName) => {
 		let successfulPurchase;
-		if (variants[duckName].unlocked == false) {
+		// if (variants[duckName].unlocked == false) {
+		if (bool[duckName] == false) {
 			successfulPurchase = buyDuck(value);
-			variants[duckName].unlocked = successfulPurchase;
+			// variants[duckName].unlocked = successfulPurchase;
+			bool[duckName] = successfulPurchase;
+			// change code here
+			saveDuckPurchased(bool);
 		}
-		if (successfulPurchase || variants[duckName].unlocked == true) {
+		if (successfulPurchase || bool[duckName] == true) {
 			changeDuck(duckName);
-			Alert.alert("Duck changed to " + duckName)
+			// Alert.alert("Duck changed to " + duckName)
 		}
 		
 	}
-	let test = [false, false, false, false]
+	// let test = [true, false, false, false]
 
 	// functionality for duck purchase
 	const buyDuck = (value) => {
@@ -107,7 +121,7 @@ const Clicker = () => {
 			setCount(newValue);
 			storeCoins(newValue);
 			Alert.alert("Bought Duck!");
-			saveDuckPurchased(variants);
+			// saveDuckPurchased(test);
 
 			return true;
 		} else {
@@ -192,19 +206,19 @@ const Clicker = () => {
 								<Text></Text>
 							</TouchableOpacity>
 
-							<TouchableOpacity onPress={() => modalVariantPress(10, "swag")}>
+							<TouchableOpacity onPress={() => modalVariantPress(10, 1)}>
 								<Image source={variants.swag.base} style={[styles.modalImg, {tintColor: "black"}]} resizeMode="contain"/>
 								<Image source={variants.swag.base} style={[styles.modalImg, {position: "absolute", opacity: styleModal("swag")}]} resizeMode="contain"/>
 								<Text>10</Text>
 							</TouchableOpacity>
 
-							<TouchableOpacity onPress={() => modalVariantPress(50, "devil")}>
+							<TouchableOpacity onPress={() => modalVariantPress(50, 2)}>
 								<Image source={variants.devil.base} style={[styles.modalImg, {tintColor: "black"}]} resizeMode="contain"/>
 								<Image source={variants.devil.base} style={[styles.modalImg, {position: "absolute", opacity: styleModal("devil")}]} resizeMode="contain"/>
 								<Text>50</Text>
 							</TouchableOpacity>
 							
-							<TouchableOpacity onPress={() => modalVariantPress(100, "angel")}>
+							<TouchableOpacity onPress={() => modalVariantPress(100, 3)}>
 								<Image source={variants.angel.base} style={[styles.modalImg, {tintColor: "black"}]} resizeMode="contain"/>
 								<Image source={variants.angel.base} style={[styles.modalImg, {position: "absolute", opacity: styleModal("angel")}]} resizeMode="contain"/>
 								<Text>100</Text>
