@@ -11,13 +11,10 @@ import {
 	Alert,
 	Dimensions
 } from "react-native";
-import { Component } from "react/cjs/react.production.min";
-import { Sound } from "./sound";
 import { Audio } from "expo-av";
 import { storeData, getData } from "./storage";
-import Icon from "react-native-ionicons";
-import { Ionicons } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
 
 const variants = [
 	{name: "Default", base: require("./assets/duck_default.png"), quack: require("./assets/duck_default_quack.png")},
@@ -73,28 +70,28 @@ const Clicker = () => {
 					onPress={() => setModalVis(true)}
 				>
 					<Entypo name="shop" size={36} color="black" />
-					{/* <Text style={styles.modalButton}>Show modal</Text> */}
 				</TouchableOpacity>
 			</View>
 
-			<View style={styles.modalButton}>
-				<Modal
-					style={styles.modalButton}
-					animationType="slide"
-					transparent={true}
-					visible={modalVisible}
-					onRequestClose={() => {
-						// Alert.alert("Modal has been closed");
-						setModalVis(!modalVisible);
-					}}
-				>
-					<TouchableOpacity
-						style={styles.modalButton}
-						onPress={() => setModalVis(!modalVisible)}
-					>
-						<Text style={styles.modalButton}>Close</Text>
-					</TouchableOpacity>
-
+			<Modal
+				animationType="slide"
+				transparent={true}
+				visible={modalVisible}
+				onRequestClose={() => {
+					// Alert.alert("Modal has been closed");
+					setModalVis(!modalVisible);
+				}}
+			>
+				<View style={styles.shopContainer}>
+					<View style={styles.shopHeader}>
+						
+						<Text styles={styles.shopText}>SHOP</Text>
+						<TouchableOpacity
+							onPress={() => setModalVis(!modalVisible)}
+						>
+							<AntDesign name="closecircle" size={36} color="black" />
+						</TouchableOpacity>
+					</View>
 					<View style={styles.modalContainer}>
 						<View style={styles.modalCell}>
 							<TouchableOpacity>
@@ -109,8 +106,8 @@ const Clicker = () => {
 						</View>
 					</View>
 
-				</Modal>
-			</View>
+				</View>
+			</Modal>
 
 			<TouchableWithoutFeedback
 				style={styles.button}
@@ -155,10 +152,34 @@ const styles = StyleSheet.create({
 		color: "white",
 		padding: 0,
 		fontWeight: "bold",
-		fontSize: 30,
+	},
+	modalCloseButton: {
+		alignItems: "flex-end",
+		justifyContent: "space-between",
+		backgroundColor: "white",
+		color: "white",
+		padding: 30,
+		fontWeight: "bold",
+	},
+	shopContainer: {
+		flex: 1,
+		flexDirection: "column",
+		borderColor: "black",
+		borderStyle: "solid",
+	},
+	shopHeader: {
+		flex: 0.5,
+		flexDirection: "row",
+		justifyContent: "space-between",
+		backgroundColor: "white",
+		padding: 30
+	},
+	shopText: {
+		fontWeight: "bold",
+		fontSize: 30
 	},
 	modalContainer: {
-		flex: 1,
+		flex: 9,
 		backgroundColor: "white"
 	},
 	modalCell: {
