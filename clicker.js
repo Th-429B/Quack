@@ -22,13 +22,10 @@ const Clicker = () => {
     }
       
         
-
   const onPress = () => {
       playSound();
       setCount(prevCount => prevCount + 1);
     }
-
-
 
 
   const [showDuckQuack, setDuckState] = useState(false);
@@ -44,7 +41,7 @@ const Clicker = () => {
   return (
     <View style={styles.container}>
       <View style={styles.countContainer}>
-        <Text>Count: {count}</Text>
+        <Text style={styles.scoreText}>Count: {count}</Text>
       </View>
       <TouchableWithoutFeedback
         style={styles.button}
@@ -60,18 +57,27 @@ const Clicker = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: "center",
-    paddingHorizontal: 10
+    // flex: 1,
+    // flexDirection: "column",
+    // justifyContent: "center",
+    // paddingHorizontal: 10
   },
   button: {
+    flex: 2,
     alignItems: "center",
     backgroundColor: "#DDDDDD",
     padding: 10
   },
   countContainer: {
-    alignItems: "center",
-    padding: 10
+    flex:0.7,
+    alignItems: "flex-start",
+    justifyContent: "flex-start",
+    padding: 5,
+    
+  },
+  scoreText: {
+    fontWeight: "bold",
+    fontSize: 30
   }
 });
 
