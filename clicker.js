@@ -65,23 +65,23 @@ const Clicker = () => {
 				</TouchableOpacity>
 			</View>
 
-			<View>
-				<Modal
-					animationType="slide"
-					transparent={true}
-					visible={modalVisible}
-					onRequestClose={() => {
-						// Alert.alert("Modal has been closed");
-						setModalVis(!modalVisible);
-					}}
-				>
+			<Modal
+				animationType="slide"
+				transparent={true}
+				visible={modalVisible}
+				onRequestClose={() => {
+					// Alert.alert("Modal has been closed");
+					setModalVis(!modalVisible);
+				}}
+			>
+				<View style={styles.shopContainer}>
 					<TouchableOpacity
 						style={styles.modalCloseButton}
 						onPress={() => setModalVis(!modalVisible)}
 					>
 						<AntDesign name="closecircle" size={36} color="black" />
 					</TouchableOpacity>
-
+					
 					<View style={styles.duckList}>
 						<View style={styles.duckListRow}>
 							<View style={styles.duckListImage}>
@@ -97,8 +97,8 @@ const Clicker = () => {
 						</View>
 					</View>
 
-				</Modal>
-			</View>
+				</View>
+			</Modal>
 
 			<TouchableWithoutFeedback
 				style={styles.button}
@@ -151,6 +151,11 @@ const styles = StyleSheet.create({
 		color: "white",
 		padding: 30,
 		fontWeight: "bold",
+	},
+	shopContainer: {
+		flex: 1,
+		borderColor: "black",
+		borderStyle: "solid",
 	},
 	duckList: {
 		flexDirection: "column",
