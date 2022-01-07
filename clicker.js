@@ -9,12 +9,12 @@ import {
 	Modal,
 	Pressable,
 	Alert,
-	Dimensions
+	Dimensions,
 } from "react-native";
 import { Audio } from "expo-av";
 import { storeData, getData } from "./storage";
-import { Entypo } from '@expo/vector-icons';
-import { AntDesign } from '@expo/vector-icons';
+import { Entypo } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
 
 const deviceWidth = Dimensions.get('window').width;
 
@@ -45,6 +45,7 @@ let currentDuck = variants.default.base;
 let currentDuckQuack = variants.default.quack;
 
 const Clicker = () => {
+
 	const [count, setCount] = useState(0);
 
 	// to load the previous count
@@ -64,7 +65,6 @@ const Clicker = () => {
 	const onPress = () => {
 		playSound();
 		storeData(count);
-
 		setCount((prevCount) => prevCount + 1);
 	};
 
@@ -100,7 +100,7 @@ const Clicker = () => {
 
 			return true;
 		} else {
-			Alert.alert("Not enough money!")
+			Alert.alert("Not enough money!");
 		}
 
 		return false;
@@ -137,7 +137,7 @@ const Clicker = () => {
 	return (
 		<View style={styles.container}>
 			<View style={styles.countContainer}>
-				<Text style={styles.scoreText}>Count: {count}</Text>
+				<Text style={styles.scoreText}>Score: {count}</Text>
 				<TouchableOpacity
 					style={styles.modalShowButton}
 					onPress={() => setModalVis(true)}
@@ -157,14 +157,18 @@ const Clicker = () => {
 			>
 				<View style={styles.shopContainer}>
 					<View style={styles.shopHeader}>
-						
-						
-						<Text style={{ fontSize: 30 ,fontWeight: "bold" }}>Shop</Text>
-						
+						<Text style={{ fontSize: 30, fontWeight: "bold" }}>
+							Shop
+						</Text>
+
 						<TouchableOpacity
 							onPress={() => setModalVis(!modalVisible)}
 						>
-							<AntDesign name="closecircle" size={36} color="black" />
+							<AntDesign
+								name="closecircle"
+								size={36}
+								color="black"
+							/>
 						</TouchableOpacity>
 					</View>
 					<View style={styles.modalContainer}>
@@ -205,7 +209,7 @@ const Clicker = () => {
 				onPressIn={duckQuack}
 				onPressOut={duckQuack}
 			>
-				<Image source={imgSource}/>
+				<Image source={imgSource} />
 			</TouchableWithoutFeedback>
 		</View>
 	);
@@ -262,26 +266,30 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 		justifyContent: "space-between",
 		backgroundColor: "white",
-		padding: 30
+		padding: 30,
 	},
 
 	modalContainer: {
 		flex: 9,
-		backgroundColor: "white"
+		backgroundColor: "white",
 	},
 	modalCell: {
 		flexDirection: "row",
 		flexWrap: "wrap",
 		overflow: "scroll",
 		alignItems: "center",
-		position: 'relative',
-		margin: 10
+		position: "relative",
+		margin: 10,
 	},
 	modalImg: {
-		width: deviceWidth/2 - 10,
-		height: deviceWidth/2 - 10
+		width: deviceWidth / 2 - 10,
+		height: deviceWidth / 2 - 10,
+	},
+	duckPrice: {
+		alignSelf: "center",
+		fontSize: 30,
+		fontWeight: "bold",
 	}
-	
 });
 
 export default Clicker;
