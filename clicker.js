@@ -96,20 +96,6 @@ const Clicker = () => {
 					</TouchableOpacity>
 
 					<View style={styles.modalContainer}>
-						{/* <View style={styles.duckListRow}>
-							<View style={styles.duckListImage}>
-								<View style={styles.duckListCell}>
-									<TouchableOpacity style={styles.duckyduckyducky}>
-										<Image source={require("./assets/duck_default.png")}/>
-									</TouchableOpacity>
-								</View>
-								<View style={styles.duckListCell}>
-									<TouchableOpacity style={styles.duckyduckyducky}>
-										<Image source={require("./assets/duck_swag_default.png")}/>
-									</TouchableOpacity>
-								</View>
-							</View>
-						</View> */}
 						<View style={styles.modalCell}>
 							<TouchableOpacity>
 								<Image source={require("./assets/duck_swag_default.png")} style={styles.modalImg} resizeMode="contain"/>
@@ -175,22 +161,6 @@ const styles = StyleSheet.create({
 		flex: 1,
 		backgroundColor: "white"
 	},
-	// duckListRow: {
-	// 	flexDirection: "row"
-	// },
-	// duckListImage: {
-	// 	flexDirection: "column",
-	// 	height: "50%",
-	// 	width: "50%"
-	// },
-	// duckListCell: {
-	// 	// width: "50%"
-	// 	// height: "50%"
-	// },
-	// duckyduckyducky: {
-	// 	height: 50,
-	// 	width: 50
-	// }
 	modalCell: {
 		flexDirection: "row",
 		flexWrap: "wrap",
