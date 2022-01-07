@@ -81,11 +81,14 @@ const Clicker = () => {
 
 	// handle shop press
 	const modalVariantPress = (value, duckName) => {
-		if (variants[duckName].unlocked == true) {
-			console.log("Already unlocked");
-			buyDuck(value);
+		let successfulPurchase;
+		if (variants[duckName].unlocked == false) {
+			successfulPurchase = buyDuck(value);
+			variants[duckName].unlocked = successfulPurchase;
 		}
-
+		if (successfulPurchase || variants[duckName].unlocked == true) {
+			changeDuck(duckName);
+		}
 		
 	}
 
@@ -93,10 +96,14 @@ const Clicker = () => {
 	const buyDuck = (value) => {
 		if (count >= value) {
 			setCount(count - value);
-			Alert.alert("Bought Duck!");
+			Alert.alert("Bought Duck!")
+
+			return true;
 		} else {
 			Alert.alert("Not enough money!");
 		}
+
+		return false;
 	}
 
 	// change main duck
@@ -168,26 +175,17 @@ const Clicker = () => {
 								<Text></Text>
 							</TouchableOpacity>
 
-							<TouchableOpacity onPress={() => {
-								buyDuck(10);
-								changeDuck("swag");
-							}}>
+							<TouchableOpacity onPress={() => modalVariantPress(10, "swag")}>
 								<Image source={variants.swag.base} style={styles.modalImg} resizeMode="contain"/>
 								<Text style={styles.duckPrice}>10</Text>
 							</TouchableOpacity>
 
-							<TouchableOpacity onPress={() => {
-								buyDuck(50);
-								changeDuck("devil");
-							}}>
+							<TouchableOpacity onPress={() => modalVariantPress(50, "devil")}>
 								<Image source={variants.devil.base} style={styles.modalImg} resizeMode="contain"/>
 								<Text style={styles.duckPrice}>50</Text>
 							</TouchableOpacity>
 							
-							<TouchableOpacity onPress={() => {
-								buyDuck(100);
-								changeDuck("angel");
-							}}>
+							<TouchableOpacity onPress={() => modalVariantPress(100, "angel")}>
 								<Image source={variants.angel.base} style={styles.modalImg} resizeMode="contain"/>
 								<Text style={styles.duckPrice}>100</Text>
 							</TouchableOpacity>
