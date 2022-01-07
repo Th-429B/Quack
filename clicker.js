@@ -14,6 +14,7 @@ import { Component } from "react/cjs/react.production.min";
 import { Sound } from "./sound";
 import { Audio } from "expo-av";
 import { storeData, getData } from "./storage";
+import { FlatList } from "react-native-web";
 
 const Clicker = () => {
 	const [count, setCount] = useState(0);
@@ -69,14 +70,25 @@ const Clicker = () => {
 						style={styles.modalButton}
 						onPress={() => setModalVis(!modalVisible)}
 					>
-						<Text style={styles.modalButton}>Hide Modal</Text>
+						<Text style={styles.modalButton}>Close</Text>
 					</Pressable>
+
+					<View style={styles.duckList}>
+						<View style={styles.duckListRow}>
+							<View style={styles.duckListImage}>
+								<TouchableOpacity>
+									<Image source={require("./assets/duck_swag_default.png")}/>
+								</TouchableOpacity>
+							</View>
+						</View>
+					</View>
+
 				</Modal>
 				<Pressable
 					style={styles.modalButton}
 					onPress={() => setModalVis(true)}
 				>
-					<Text style={styles.modalButton}>Show modal</Text>
+					<Text style={styles.modalButton}>Customise duck</Text>
 				</Pressable>
 			</View>
 
@@ -122,6 +134,13 @@ const styles = StyleSheet.create({
 		color: "white",
 		fontWeight: "bold",
 		fontSize: 30,
+	},
+	duckList: {
+		flexDirection: "column"
+	},
+
+	duckListRow: {
+		flexDirection: "row"
 	}
 });
 
