@@ -132,7 +132,7 @@ const Clicker = () => {
 	return (
 		<View style={styles.container}>
 			<View style={styles.countContainer}>
-				<Text style={styles.scoreText}>Score: {count}</Text>
+				<Text style={styles.scoreText}>Coins: {count}</Text>
 				<TouchableOpacity
 					style={styles.modalShowButton}
 					onPress={() => setModalVis(true)}
