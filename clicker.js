@@ -87,7 +87,9 @@ const Clicker = () => {
 				<View style={styles.shopContainer}>
 					<View style={styles.shopHeader}>
 						
-						<Text styles={styles.shopText}>SHOP</Text>
+						
+						<Text style={{ fontSize: 30 ,fontWeight: "bold" }}>Shop</Text>
+						
 						<TouchableOpacity
 							onPress={() => setModalVis(!modalVisible)}
 						>
@@ -98,10 +100,13 @@ const Clicker = () => {
 						<View style={styles.modalCell}>
 							<TouchableOpacity>
 								<Image source={require("./assets/duck_swag_default.png")} style={styles.modalImg} resizeMode="contain"/>
+								<Text>3000</Text>
 							</TouchableOpacity>
 							<TouchableOpacity>
 								<Image source={require("./assets/duck_swag_default.png")} style={styles.modalImg} resizeMode="contain"/>
+								<Text>3000</Text>
 							</TouchableOpacity>
+							
 							<TouchableOpacity>
 								<Image source={require("./assets/duck_swag_default.png")} style={styles.modalImg} resizeMode="contain"/>
 							</TouchableOpacity>
@@ -176,10 +181,7 @@ const styles = StyleSheet.create({
 		backgroundColor: "white",
 		padding: 30
 	},
-	shopText: {
-		fontWeight: "bold",
-		fontSize: 30
-	},
+
 	modalContainer: {
 		flex: 9,
 		backgroundColor: "white"
