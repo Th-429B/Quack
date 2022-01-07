@@ -8,7 +8,8 @@ import {
 	TouchableWithoutFeedback,
 	Modal,
 	Pressable,
-	Alert
+	Alert,
+	Dimensions
 } from "react-native";
 import { Component } from "react/cjs/react.production.min";
 import { Sound } from "./sound";
@@ -17,6 +18,13 @@ import { storeData, getData } from "./storage";
 import Icon from "react-native-ionicons";
 import { Ionicons } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
+
+const variants = [
+	{name: "Default", base: require("./assets/duck_default.png"), quack: require("./assets/duck_default_quack.png")},
+	{name: "swag", base: require("./assets/duck_swag_default.png"), quack: require("./assets/duck_swag_quack.png")}
+]
+
+const deviceWidth = Dimensions.get('window').width;
 
 const Clicker = () => {
 	const [count, setCount] = useState(0);
@@ -87,20 +95,31 @@ const Clicker = () => {
 						<Text style={styles.modalButton}>Close</Text>
 					</TouchableOpacity>
 
-					<View style={styles.duckList}>
-						<View style={styles.duckListRow}>
+					<View style={styles.modalContainer}>
+						{/* <View style={styles.duckListRow}>
 							<View style={styles.duckListImage}>
 								<View style={styles.duckListCell}>
-									<TouchableOpacity>
+									<TouchableOpacity style={styles.duckyduckyducky}>
 										<Image source={require("./assets/duck_default.png")}/>
 									</TouchableOpacity>
 								</View>
 								<View style={styles.duckListCell}>
-									<TouchableOpacity>
+									<TouchableOpacity style={styles.duckyduckyducky}>
 										<Image source={require("./assets/duck_swag_default.png")}/>
 									</TouchableOpacity>
 								</View>
 							</View>
+						</View> */}
+						<View style={styles.modalCell}>
+							<TouchableOpacity>
+								<Image source={require("./assets/duck_swag_default.png")} style={styles.modalImg} resizeMode="contain"/>
+							</TouchableOpacity>
+							<TouchableOpacity>
+								<Image source={require("./assets/duck_swag_default.png")} style={styles.modalImg} resizeMode="contain"/>
+							</TouchableOpacity>
+							<TouchableOpacity>
+								<Image source={require("./assets/duck_swag_default.png")} style={styles.modalImg} resizeMode="contain"/>
+							</TouchableOpacity>
 						</View>
 					</View>
 
@@ -113,7 +132,7 @@ const Clicker = () => {
 				onPressIn={changeDuck}
 				onPressOut={changeDuck}
 			>
-				<Image source={imgSource} />
+				<Image source={imgSource}/>
 			</TouchableWithoutFeedback>
 		</View>
 	);
@@ -152,27 +171,37 @@ const styles = StyleSheet.create({
 		fontWeight: "bold",
 		fontSize: 30,
 	},
-	duckList: {
-		flexDirection: "column",
+	modalContainer: {
+		flex: 1,
 		backgroundColor: "white"
 	},
-
-	duckListRow: {
-		flexDirection: "row"
+	// duckListRow: {
+	// 	flexDirection: "row"
+	// },
+	// duckListImage: {
+	// 	flexDirection: "column",
+	// 	height: "50%",
+	// 	width: "50%"
+	// },
+	// duckListCell: {
+	// 	// width: "50%"
+	// 	// height: "50%"
+	// },
+	// duckyduckyducky: {
+	// 	height: 50,
+	// 	width: 50
+	// }
+	modalCell: {
+		flexDirection: "row",
+		flexWrap: "wrap",
+		overflow: "scroll",
+		alignItems: "center",
+		position: 'relative',
+		margin: 10
 	},
-	duckListImage: {
-		flexDirection: "column",
-		flexShrink: 1
-	},
-	duckListCell: {
-		width: "50%"
-		// height: "50%"
-	},
-	duckyduckyducky: {
-		flex: 1,
-		width: null,
-		height: null,
-		resizeMode: "contain"
+	modalImg: {
+		width: deviceWidth/2 - 10,
+		height: deviceWidth/2 - 10
 	}
 	
 });
