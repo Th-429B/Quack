@@ -12,7 +12,7 @@ import {
 	Dimensions,
 } from "react-native";
 import { Audio } from "expo-av";
-import { storeData, getData } from "./storage";
+import { storeCoins, loadCoins, saveDuckPurchased } from "./storage";
 import { Entypo } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 
@@ -50,7 +50,7 @@ const Clicker = () => {
 
 	// to load the previous count
 	useEffect(() => {
-        getData((count) => setCount(count))
+        loadCoins((count) => setCount(count))
     }, []);
 
 	// to play duck sound on click
@@ -64,7 +64,7 @@ const Clicker = () => {
 	// on press duck handler
 	const onPress = () => {
 		playSound();
-		storeData(count);
+		storeCoins(count);
 		setCount((prevCount) => prevCount + 1);
 	};
 
@@ -88,15 +88,20 @@ const Clicker = () => {
 		}
 		if (successfulPurchase || variants[duckName].unlocked == true) {
 			changeDuck(duckName);
+			Alert.alert("Duck changed to " + duckName)
 		}
 		
 	}
+	let test = [false, false, false, false]
 
 	// functionality for duck purchase
 	const buyDuck = (value) => {
 		if (count >= value) {
-			setCount(count - value);
-			Alert.alert("Bought Duck!")
+			newValue = count - value;
+			setCount(newValue);
+			storeCoins(newValue);
+			Alert.alert("Bought Duck!");
+			saveDuckPurchased(test);
 
 			return true;
 		} else {
