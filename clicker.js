@@ -16,30 +16,33 @@ import { storeData, getData } from "./storage";
 import { Entypo } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 
-const variants = [
-	{
-		name: "default",
-		base: require("./assets/duck_default.png"),
-		quack: require("./assets/duck_default_quack.png"),
-	},
-	{
-		name: "swag",
-		base: require("./assets/duck_swag_default.png"),
-		quack: require("./assets/duck_swag_quack.png"),
-	},
-	{
-		name: "devil",
-		base: require("./assets/duck_devil_default.png"),
-		quack: require("./assets/duck_devil_quack.png"),
-	},
-	{
-		name: "angel",
-		base: require("./assets/duck_angel_default.png"),
-		quack: require("./assets/duck_angel_quack.png"),
-	},
-];
+const deviceWidth = Dimensions.get('window').width;
 
-const deviceWidth = Dimensions.get("window").width;
+const variants = {
+	default: {
+		base: require("./assets/ducks/duck_default.png"),
+		quack: require("./assets/ducks/duck_default_quack.png"),
+		unlocked: true
+	},
+	swag: {
+		base: require("./assets/ducks/duck_swag_default.png"),
+		quack: require("./assets/ducks/duck_swag_quack.png"),
+		unlocked: false
+	},
+	devil: {
+		base: require("./assets/ducks/duck_devil_default.png"),
+		quack: require("./assets/ducks/duck_devil_quack.png"),
+		unlocked: false
+	},
+	angel: {
+		base: require("./assets/ducks/duck_angel_default.png"),
+		quack: require("./assets/ducks/duck_angel_quack.png"),
+		unlocked: false
+	}
+};
+
+let currentDuck = variants.default.base;
+let currentDuckQuack = variants.default.quack;
 
 const Clicker = () => {
 
@@ -47,8 +50,8 @@ const Clicker = () => {
 
 	// to load the previous count
 	useEffect(() => {
-		getData((count) => setCount(count));
-	}, []);
+        getData((count) => setCount(count))
+    }, []);
 
 	// to play duck sound on click
 	async function playSound() {
@@ -67,18 +70,26 @@ const Clicker = () => {
 
 	// change duck image
 	const [showDuckQuack, setDuckState] = useState(false);
-	const changeDuck = () => {
+	const duckQuack = () => {
 		setDuckState(showDuckQuack ? false : true);
 	};
-	const defaultDuck = require("./assets/duck_default.png");
-	const defaultDuckQuack = require("./assets/duck_default_quack.png");
 
-	var imgSource = showDuckQuack ? defaultDuckQuack : defaultDuck;
+	var imgSource = showDuckQuack ? currentDuckQuack : currentDuck;
 
 	// modal here
 	const [modalVisible, setModalVis] = useState(false);
 
-	// functionality for shop
+	// handle shop press
+	const modalVariantPress = (value, duckName) => {
+		if (variants[duckName].unlocked == true) {
+			console.log("Already unlocked");
+			buyDuck(value);
+		}
+
+		
+	}
+
+	// functionality for duck purchase
 	const buyDuck = (value) => {
 		if (count >= value) {
 			setCount(count - value);
@@ -86,7 +97,30 @@ const Clicker = () => {
 		} else {
 			Alert.alert("Not enough money!");
 		}
-	};
+	}
+
+	// change main duck
+	const changeDuck = (duckName) => {
+		switch (duckName) {
+			case "default":
+				currentDuck = variants.default.base;
+				currentDuckQuack = variants.default.quack;
+				break;
+			case "swag":
+				currentDuck = variants.swag.base;
+				currentDuckQuack = variants.swag.quack;
+				break;
+			case "devil":
+				currentDuck = variants.devil.base;
+				currentDuckQuack = variants.devil.quack;
+				break;
+			case "angel":
+				currentDuck = variants.angel.base;
+				currentDuckQuack = variants.angel.quack;
+				break;
+		}
+		setModalVis(false);
+	}
 
 	return (
 		<View style={styles.container}>
@@ -127,30 +161,35 @@ const Clicker = () => {
 					</View>
 					<View style={styles.modalContainer}>
 						<View style={styles.modalCell}>
-							<TouchableOpacity onPress={() => buyDuck(10)}>
-								<Image
-									source={require("./assets/duck_swag_default.png")}
-									style={styles.modalImg}
-									resizeMode="contain"
-								/>
-								<Text style={styles.duckPrice}>10</Text>
-							</TouchableOpacity>
-							<TouchableOpacity onPress={() => buyDuck(50)}>
-								<Image
-									source={require("./assets/duck_swag_default.png")}
-									style={styles.modalImg}
-									resizeMode="contain"
-								/>
-								<Text style={styles.duckPrice}>50</Text>
+							<TouchableOpacity onPress={() => {
+								changeDuck("default");
+							}}>
+								<Image source={variants.default.base} style={styles.modalImg} resizeMode="contain"/>
+								<Text></Text>
 							</TouchableOpacity>
 
-							<TouchableOpacity onPress={() => buyDuck(100)}>
-								<Image
-									source={require("./assets/duck_swag_default.png")}
-									style={styles.modalImg}
-									resizeMode="contain"
-								/>
-								<Text style={styles.duckPrice}>100</Text>
+							<TouchableOpacity onPress={() => {
+								buyDuck(10);
+								changeDuck("swag");
+							}}>
+								<Image source={variants.swag.base} style={styles.modalImg} resizeMode="contain"/>
+								<Text>10</Text>
+							</TouchableOpacity>
+
+							<TouchableOpacity onPress={() => {
+								buyDuck(50);
+								changeDuck("devil");
+							}}>
+								<Image source={variants.devil.base} style={styles.modalImg} resizeMode="contain"/>
+								<Text>50</Text>
+							</TouchableOpacity>
+							
+							<TouchableOpacity onPress={() => {
+								buyDuck(100);
+								changeDuck("angel");
+							}}>
+								<Image source={variants.angel.base} style={styles.modalImg} resizeMode="contain"/>
+								<Text>100</Text>
 							</TouchableOpacity>
 						</View>
 					</View>
@@ -160,8 +199,8 @@ const Clicker = () => {
 			<TouchableWithoutFeedback
 				style={styles.button}
 				onPress={onPress}
-				onPressIn={changeDuck}
-				onPressOut={changeDuck}
+				onPressIn={duckQuack}
+				onPressOut={duckQuack}
 			>
 				<Image source={imgSource} />
 			</TouchableWithoutFeedback>
