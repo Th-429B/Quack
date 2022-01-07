@@ -173,7 +173,7 @@ const Clicker = () => {
 								changeDuck("swag");
 							}}>
 								<Image source={variants.swag.base} style={styles.modalImg} resizeMode="contain"/>
-								<Text>10</Text>
+								<Text style={styles.duckPrice}>10</Text>
 							</TouchableOpacity>
 
 							<TouchableOpacity onPress={() => {
@@ -181,7 +181,7 @@ const Clicker = () => {
 								changeDuck("devil");
 							}}>
 								<Image source={variants.devil.base} style={styles.modalImg} resizeMode="contain"/>
-								<Text>50</Text>
+								<Text style={styles.duckPrice}>50</Text>
 							</TouchableOpacity>
 							
 							<TouchableOpacity onPress={() => {
@@ -189,7 +189,7 @@ const Clicker = () => {
 								changeDuck("angel");
 							}}>
 								<Image source={variants.angel.base} style={styles.modalImg} resizeMode="contain"/>
-								<Text>100</Text>
+								<Text style={styles.duckPrice}>100</Text>
 							</TouchableOpacity>
 						</View>
 					</View>
