@@ -18,11 +18,13 @@ import { storeData, getData } from "./storage";
 const Clicker = () => {
 	const [count, setCount] = useState(0);
 
+	// to load the previous count
 	useEffect(() => {
         getData((count) => setCount(count))
     }, []);
 
 
+	// to play duck sound on click
 	async function playSound() {
 		const sound = new Audio.Sound();
 		const status = await sound.loadAsync(require("./assets/quack.mp3"));
@@ -30,6 +32,7 @@ const Clicker = () => {
 		await sound.replayAsync();
 	}
 
+	// on press duck handler
 	const onPress = () => {
 		playSound();
 		storeData(count);
@@ -37,6 +40,7 @@ const Clicker = () => {
 		setCount((prevCount) => prevCount + 1);
 	};
 
+	// change duck image
 	const [showDuckQuack, setDuckState] = useState(false);
 	const changeDuck = () => {
 		setDuckState(showDuckQuack ? false : true);
@@ -46,6 +50,7 @@ const Clicker = () => {
 
 	var imgSource = showDuckQuack ? defaultDuckQuack : defaultDuck;
 
+	// modal here
 	const [modalVisible, setModalVis] = useState(false);
 
 	return (
