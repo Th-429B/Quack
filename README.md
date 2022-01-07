@@ -1,4 +1,9 @@
+
+
 # Quack
+![Quack](../main/assets/ducks/duck_default.png)
+
+
 Quack is a Hack&Roll 2022 project, made by 2 guys who likes ducks. This app aims to be an outlet for stress admist the covid pandemic we are living in now.
 
 # What it is?
