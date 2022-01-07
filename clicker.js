@@ -16,12 +16,24 @@ import { storeData, getData } from "./storage";
 import { Entypo } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 
-const variants = [
-	{name: "default", base: require("./assets/duck_default.png"), quack: require("./assets/duck_default_quack.png")},
-	{name: "swag", base: require("./assets/duck_swag_default.png"), quack: require("./assets/duck_swag_quack.png")},
-	{name: "devil", base: require("./assets/duck_devil_default.png"), quack: require("./assets/duck_devil_quack.png")},
-	{name: "angel", base: require("./assets/duck_angel_default.png"), quack: require("./assets/duck_angel_quack.png")}
-]
+const variants = {
+	default: {
+		base: require("./assets/duck_default.png"),
+		quack: require("./assets/duck_default_quack.png")
+	},
+	swag: {
+		base: require("./assets/duck_swag_default.png"),
+		quack: require("./assets/duck_swag_quack.png")
+	},
+	devil: {
+		base: require("./assets/duck_devil_default.png"),
+		quack: require("./assets/duck_devil_quack.png")
+	},
+	angel: {
+		base: require("./assets/duck_angel_default.png"),
+		quack: require("./assets/duck_angel_quack.png")
+	}
+};
 
 const deviceWidth = Dimensions.get('window').width;
 
@@ -57,6 +69,8 @@ const Clicker = () => {
 	};
 	const defaultDuck = require("./assets/duck_default.png");
 	const defaultDuckQuack = require("./assets/duck_default_quack.png");
+	const currentDuck = variants.default.base;
+	const currentDuckQuack = variants.default.quack;
 
 	var imgSource = showDuckQuack ? defaultDuckQuack : defaultDuck;
 
