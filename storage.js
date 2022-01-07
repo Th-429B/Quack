@@ -11,14 +11,14 @@ export const storeData = async (counter) => {
 	}
 };
 
-export const getData = async () => {
+export const getData = async (setState) => {
 	try {
 		const value = await AsyncStorage.getItem("counter");
 		// if (counter !== null) {
 		// 	value = parseInt(value);
 		// }
-
-        return counter !== null ? parseInt(value) : 0;
+        console.log(value);
+        return value !== null ? setState(parseInt(value) + 1) : setState(0);
 	} catch (e) {
         alert('Error: Unable to load score.');
         console.log(e);

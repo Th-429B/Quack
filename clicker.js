@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
 	StyleSheet,
 	Text,
@@ -14,6 +14,10 @@ import { storeData, getData } from "./storage";
 
 const Clicker = () => {
 	const [count, setCount] = useState(0);
+
+	useEffect(() => {
+        getData((count) => setCount(count))
+    }, []);
 
 
 	async function playSound() {
