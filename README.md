@@ -17,7 +17,9 @@ It was made with
 
 # links
 ## Video Demo
-https://drive.google.com/file/d/1NPTLWxZ8veDswaNyf-KKTwM_k_qWTL1Y/view?usp=sharing
+[Video} (https://drive.google.com/file/d/1NPTLWxZ8veDswaNyf-KKTwM_k_qWTL1Y/view?usp=sharing)
 ## APK Installation
-
+1. Download the APK from [this link](https://github.com/Th-429B/Quack/releases/tag/v1.0)
+2. Install the APK on your andriod device
+3. Play Quack!
 
