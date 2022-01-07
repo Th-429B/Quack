@@ -90,12 +90,16 @@ const Clicker = () => {
 					<View style={styles.duckList}>
 						<View style={styles.duckListRow}>
 							<View style={styles.duckListImage}>
-								<TouchableOpacity>
-									<Image source={require("./assets/duck_default.png")}/>
-								</TouchableOpacity>
-								<TouchableOpacity>
-									<Image source={require("./assets/duck_swag_default.png")}/>
-								</TouchableOpacity>
+								<View style={styles.duckListCell}>
+									<TouchableOpacity>
+										<Image source={require("./assets/duck_default.png")}/>
+									</TouchableOpacity>
+								</View>
+								<View style={styles.duckListCell}>
+									<TouchableOpacity>
+										<Image source={require("./assets/duck_swag_default.png")}/>
+									</TouchableOpacity>
+								</View>
 							</View>
 						</View>
 					</View>
@@ -149,7 +153,8 @@ const styles = StyleSheet.create({
 		fontSize: 30,
 	},
 	duckList: {
-		flexDirection: "column"
+		flexDirection: "column",
+		backgroundColor: "white"
 	},
 
 	duckListRow: {
@@ -157,8 +162,17 @@ const styles = StyleSheet.create({
 	},
 	duckListImage: {
 		flexDirection: "column",
-		flexShrink: 1,
-		flex: -1
+		flexShrink: 1
+	},
+	duckListCell: {
+		width: "50%"
+		// height: "50%"
+	},
+	duckyduckyducky: {
+		flex: 1,
+		width: null,
+		height: null,
+		resizeMode: "contain"
 	}
 	
 });
