@@ -12,7 +12,7 @@ import {
 	Dimensions,
 } from "react-native";
 import { Audio } from "expo-av";
-import { storeCoins, loadCoins, saveDuckPurchased } from "./storage";
+import { storeCoins, loadCoins, saveDuckPurchased, loadDuckPurchased } from "./storage";
 import { Entypo } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 
@@ -41,16 +41,22 @@ const variants = {
 	}
 };
 
+// const variants = loadDuckPurchased();
+
+// let ducksPurchased = loadDuckPurchased();
+
 let currentDuck = variants.default.base;
 let currentDuckQuack = variants.default.quack;
 
 const Clicker = () => {
 
 	const [count, setCount] = useState(0);
+	// const [variant, setVariant] = useState([]);
 
 	// to load the previous count
 	useEffect(() => {
-        loadCoins((count) => setCount(count))
+		loadDuckPurchased((list) => setVariant(list));
+        loadCoins((count) => setCount(count));
     }, []);
 
 	// to play duck sound on click
@@ -97,11 +103,11 @@ const Clicker = () => {
 	// functionality for duck purchase
 	const buyDuck = (value) => {
 		if (count >= value) {
-			newValue = count - value;
+			var newValue = count - value;
 			setCount(newValue);
 			storeCoins(newValue);
 			Alert.alert("Bought Duck!");
-			saveDuckPurchased(test);
+			saveDuckPurchased(variants);
 
 			return true;
 		} else {
