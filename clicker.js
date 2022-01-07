@@ -11,21 +11,21 @@ const Clicker = () => {
     const [sound, setSound] = React.useState();
       
     async function playSound() {
-        console.log('Loading Sound');
+        // console.log('Loading Sound');
         const sound = new Audio.Sound();
         const status = await sound.loadAsync(require('./assets/quack.mp3'));
           
         setSound(sound);
       
-        console.log('Playing Sound');
+        // console.log('Playing Sound');
         await sound.replayAsync(); 
     }
       
         
 
   const onPress = () => {
-      setCount(prevCount => prevCount + 1);
       playSound();
+      setCount(prevCount => prevCount + 1);
     }
 
 
