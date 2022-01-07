@@ -5,6 +5,7 @@ import { Audio } from 'expo-av';
 
 export default function Sound() {
   const [sound, setSound] = React.useState();
+  
 
   async function playSound() {
     console.log('Loading Sound');
@@ -16,13 +17,13 @@ export default function Sound() {
     console.log('Playing Sound');
     await sound.replayAsync(); }
 
-  React.useEffect(() => {
-    return sound
-      ? () => {
-          console.log('Unloading Sound');
-          sound.unloadAsync(); }
-      : undefined;
-  }, [sound]);
+//   React.useEffect(() => {
+//     return sound
+//       ? () => {
+//           console.log('Unloading Sound');
+//           sound.unloadAsync(); }
+//       : undefined;
+//   }, [sound]);
 
   return (
     <View >
